@@ -34,7 +34,7 @@ console.log('Login Successful');
   logout()
   {
     localStorage.removeItem('token');
-    console.log('logout successful');
+    /*console.log(error);*/
   }
 
 }

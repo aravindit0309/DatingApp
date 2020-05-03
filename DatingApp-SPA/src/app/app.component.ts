@@ -8,7 +8,7 @@ import { AuthService } from './_services/Auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  jwtHelper = new JwtHelperService();  
+  jwtHelper = new JwtHelperService();
 
   constructor(private authservice: AuthService){}
   ngOnInit()

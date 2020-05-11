@@ -13,23 +13,26 @@ import { AuthService } from 'src/app/_services/Auth.service';
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm', {static: true}) editForm: NgForm;
-  @HostListener('window:beforeunload', ['$event'])
   user: User;
-
-  unloadNotification($event: any){
-    if (this.editForm.dirty)
-    {
-    $event.returnValue = true;
-    }
-  }
+  photoUrl: string;
+  // @HostListener('window:beforeunload', ['$event']) Aravind Commenting this method since getting 
+  // console error while refreshing the chrome browser in the member edit screen
+  // unloadNotification($event: any){
+  //   if (this.editForm.dirty)
+  //   {
+  //   $event.returnValue = true;
+  //   }
+  // }
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private userService: UserService,
-    private authService: AuthService) { }
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
-      this.user = data['user'];
+      this.user = data.user;
     });
+
+    this.authService.currentPhotoUrl.subscribe( photoUrl => { this.photoUrl = photoUrl; });
     }
 
     updateUser()
@@ -40,6 +43,11 @@ export class MemberEditComponent implements OnInit {
       }, err =>{
         this.alertify.error(err);
       });
+    }
+
+    updateMainPhoto(photoUrl)
+    {
+      this.user.photoUrl = photoUrl;
     }
 
 }

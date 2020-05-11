@@ -33,30 +33,29 @@ galleryImages: NgxGalleryImage[];
         preview: false
       }
     ];
-    // this.galleryImages = this.getImages();
-    this.galleryImages = [ {
-      small: this.user.photoUrl,
-      medium: this.user.photoUrl,
-      big: this.user.photoUrl
-  }];
+    this.galleryImages = this.getImages();
+  //   this.galleryImages = [ {
+  //     small: this.user.photoUrl,
+  //     medium: this.user.photoUrl,
+  //     big: this.user.photoUrl
+  // }];
 
   }
 
   getImages()
       {
         const imageUrls = [];
-        //console.log(this.user);
-        //console.log(this.user.Photos);
-        for (const photo of this.user.Photos)
-        {
-          // console.log('Inside loop');
-          imageUrls.push({
-            small: photo.url,
-            medium: photo.url,
-            big: photo.url,
-            description: photo.description
-          });
-        }
+        // console.log(this.user);
+        console.log(this.user.photos);
+
+        for (const photo of this.user.photos) {
+       imageUrls.push ({
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url,
+        description: photo.description
+      });
+    }
         return imageUrls;
       }
 

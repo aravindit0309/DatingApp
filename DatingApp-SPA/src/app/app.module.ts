@@ -9,7 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import {NgxGalleryModule} from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
-import {TimeAgoPipe} from 'time-ago-pipe/time-ago.pipe';
+import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
 
@@ -55,7 +55,7 @@ export function tokenGetter(){
       MemberDetailComponent,
       MemberEditComponent,
       PhotoEditorComponent,
-      // TimeAgoPipe,
+      
    ],
    imports: [
       BrowserModule,
@@ -71,6 +71,7 @@ export function tokenGetter(){
       NgxGalleryModule,
       FileUploadModule,
       PaginationModule.forRoot(),
+      TimeagoModule.forRoot(),
       JwtModule.forRoot({
          config: {
            // tslint:disable-next-line: object-literal-shorthand

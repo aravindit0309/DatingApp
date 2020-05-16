@@ -9,7 +9,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import {NgxGalleryModule} from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
-import {TimeAgoPipe} from 'time-ago-pipe';
+import {TimeAgoPipe} from 'time-ago-pipe/time-ago.pipe';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
+
 
 
 import { AppComponent } from './app.component';
@@ -61,11 +64,13 @@ export function tokenGetter(){
       ReactiveFormsModule,
       BrowserAnimationsModule,
       TabsModule.forRoot(),
+      ButtonsModule.forRoot(),
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
       FileUploadModule,
+      PaginationModule.forRoot(),
       JwtModule.forRoot({
          config: {
            // tslint:disable-next-line: object-literal-shorthand

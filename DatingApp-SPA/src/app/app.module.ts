@@ -35,6 +35,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_gaurds/prevent-unsaved-changes.gaurd';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 
 
@@ -54,8 +55,7 @@ export function tokenGetter(){
       MemberCardComponent,
       MemberDetailComponent,
       MemberEditComponent,
-      PhotoEditorComponent,
-      
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
@@ -88,7 +88,8 @@ export function tokenGetter(){
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent

@@ -16,14 +16,14 @@
             <div class="card-footer">
               <div class="btn-group d-flex">
                 <button class="btn btn-primary mr-2"><i class="fa fa-heart"></i></button>
-                <button class="btn btn-success"><i class="fa fa-envelope"></i></button>
+                <button class="btn btn-success" (click) = "selectTab(3)"><i class="fa fa-envelope"></i></button>
               </div>
             </div> <!-- End of card foorter-->
           </div> <!-- End of card-->
       </div> <!-- End of sm-4-->
       <div class="col-sm-8">
           <div class="tab--panel">
-              <tabset class="member-tabset">  
+              <tabset class="member-tabset" #memberTabs>  
                   <tab heading="About {{user?.knownAs}}">
                       <h4>Description</h4><p>{{user.introduction}}</p> 
                       <h4>Looking For</h4><p>{{user.lookingFor}}</p></tab>               
@@ -31,7 +31,9 @@
                   <tab heading="Photos"><h4>Photos</h4>
                     <P><ngx-gallery [options]= "galleryOptions" [images]= "galleryImages"></ngx-gallery></P>
                   </tab>
-                  <tab heading="Messages"><h4>Messages</h4><p>Messages will go here</p></tab>
+                  <tab heading="Messages">
+                    <app-member-messages [recipientId] = "user.id"></app-member-messages>
+                  </tab>
               </tabset>
           </div> <!-- End of tab panel-->          
       </div> <!-- End of sm-8-->

@@ -32,10 +32,40 @@ namespace DatingApp.API
 
         public IConfiguration Configuration { get; }
 
+        // public void ConfigureDevelopmentServices(IServiceCollection services)
+        // {
+        //      services.AddDbContext<DataContext>( X =>
+        //         {   
+        //             X.UseLazyLoadingProxies();
+        //             X.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+        //         }
+        //         );
+            
+        //     ConfigureServices(services);
+        // }
+
+        
+        // public void ConfigureProductionServices(IServiceCollection services)
+        // {
+        //      services.AddDbContext<DataContext>( X =>
+        //         {   
+        //             X.UseLazyLoadingProxies();
+        //             X.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+        //         }
+        //         );
+            
+        //     ConfigureServices(services);
+        // }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(X=>X.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>( X =>
+                {   
+                    X.UseLazyLoadingProxies();
+                    X.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                }
+                );
             services.AddControllers().AddNewtonsoftJson(opt =>opt.SerializerSettings.ReferenceLoopHandling =
             Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
@@ -65,28 +95,37 @@ namespace DatingApp.API
                 app.UseDeveloperExceptionPage();
             }
             else{
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context => {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if(error != null)
-                        {
-                            context.Response.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message);
-                        }
-                    } );
-                });
+                // app.UseExceptionHandler(builder => {
+                //     builder.Run(async context => {
+                //         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                //         var error = context.Features.Get<IExceptionHandlerFeature>();
+                //         if(error != null)
+                //         {
+                //             context.Response.AddApplicationError(error.Error.Message);
+                //             await context.Response.WriteAsync(error.Error.Message);
+                //         }
+                //     } );
+                // });
+                app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+             app.UseDeveloperExceptionPage();
+
+            app.UseHttpsRedirection();
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
 
